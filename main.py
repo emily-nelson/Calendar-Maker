@@ -18,7 +18,7 @@ while True:
 
 # Loop to get a month from user
 while True:
-    print('Enter a month, 1-12': )
+    print('Enter a month, 1-12: ')
     response = input('> ')
 
     if not response.isdecimal():
@@ -45,5 +45,36 @@ def getCalendarFor(year, month):
     # The bank rows have ten spaces in between the | days separators:
     blankRow = ('|          ' * 7) + '|\n'
 
-    
+    # Get first date in month
+    currentDate = datetime.date(year, month, 1)
 
+    # Roll back currentDate until it's a Sunday
+    while currentDate.weekday() != 6:
+        currentDate -= datetime.timedelta(days=1)
+    
+    # Loop over each week in the month
+    while True: 
+        calText + weekSeparator
+
+        # dayNumberRow is the row with the day number labels:
+        dayNumberRow = ''
+        for i in range(7):
+            dayNumberLabel = str(currentDate.day).rjust(2) # prints current date
+            dayNumberRow += '|' + dayNumberLabel + (' ' * 8) # prints the | 2          | part
+            currentDate += datetime.timedelta(days=1) # go to next day
+        dayNumberRow += '|\n' # encloses week
+
+        calText += dayNumberRow
+        for i in range(3):
+            calText += blankRow
+
+        if currentDate.month != month:
+            break
+
+    # add bottom horizontal line
+    calText += weekSeparator
+    return calText
+
+calText = getCalendarFor(year, month)
+print(calText)
+        
