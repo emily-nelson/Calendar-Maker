@@ -79,3 +79,9 @@ def getCalendarFor(year, month):
 calText = getCalendarFor(year, month)
 print(calText)
         
+# Save the calendar to a text file
+calendarFilename = f'calendar_{year}_{month}.txt'
+with open(calendarFilename, 'w') as fileObj:
+    fileObj.write(calText)
+
+print("Saved to " + calendarFilename)
