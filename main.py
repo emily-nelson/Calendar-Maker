@@ -13,7 +13,7 @@ while True:
         year = int(response)
         break
 
-    print('Please enter a numerica year, like 2023.')
+    print('Please enter a numerical year, like 2023.')
     continue
 
 # Loop to get a month from user
@@ -37,7 +37,7 @@ def getCalendarFor(year, month):
 
     # add days of the week labels to the calendar:
     # try changing to abbreviations: SUN, MON, TUE
-    calText += '...Sunday.....Monday....Tuesday...Wednesday...Thursday....Friday....Saturday..\n'
+    calText += '...Monday....Tuesday....Wednesday...Thursday....Friday....Saturday....Sunday...\n'
 
     # The horizontal line string that separates weeks:
     weekSeparator = ('+----------' * 7) + '+\n'
@@ -49,7 +49,7 @@ def getCalendarFor(year, month):
     currentDate = datetime.date(year, month, 1)
 
     # Roll back currentDate until it's a Sunday
-    while currentDate.weekday() != 6:
+    while currentDate.weekday() != 0:
         currentDate -= datetime.timedelta(days=1)
     
     # Loop over each week in the month
@@ -68,11 +68,12 @@ def getCalendarFor(year, month):
         for i in range(3):
             calText += blankRow
 
+        calText += weekSeparator
+
         if currentDate.month != month:
             break
 
     # add bottom horizontal line
-    calText += weekSeparator
     return calText
 
 calText = getCalendarFor(year, month)
